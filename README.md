@@ -5,7 +5,7 @@
 3.passwall发现没有类似的设置教程，所以出一个。
 
 安装sing-box
-正式版
+正式版 （支持hysteria2）
 
 bash -c "$(curl -L https://sing-box.vercel.app)" @ install
 直接安装预发布版（支持hysteria2）
