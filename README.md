@@ -1,4 +1,3 @@
-```markdown
 # 前言
 
 1. 目前伪装最好的两种协议，一个代表tcp协议（reality）的目前巅峰，一个新型UDP协议（hysteria2）的宠儿。
@@ -20,7 +19,7 @@ bash -c "$(curl -L https://raw.githubusercontent.com/josbu/singbox-hysteria2/mai
 bash -c "$(curl -L https://sing-box.vercel.app)" @ install --beta
 ```
 
-### 如何需要卸载
+### 如果需要卸载
 
 ```bash
 bash -c "$(curl -L https://sing-box.vercel.app)" @ remove
@@ -71,6 +70,4 @@ iptables -t nat -A PREROUTING -p udp --dport 20000:40000 -j DNAT --to-destinatio
 iptables -t nat -nL --line
 netfilter-persistent save
 ```
-```
 
-这是一个格式化后的Markdown文本，你可以复制粘贴到你的GitHub项目的`README.md`文件中。
