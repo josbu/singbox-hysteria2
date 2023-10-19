@@ -48,7 +48,9 @@ journalctl -u sing-box -o cat -f
 ## 服务端vps搭建
 
 - 自签证书申请，这里申请的是bing.com，申请了10年，可以用到你vps商家跑路了
-
+```bash
+mkdir -p /etc/hysteria && openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/private.key && openssl req -new -x509 -days 3650 -key /etc/hysteria/private.key -out /etc/hysteria/cert.pem -subj "/CN=bing.com"
+```
 # singbox-hysteria2
 
 ## 端口跳跃
