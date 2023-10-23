@@ -51,7 +51,96 @@ journalctl -u sing-box -o cat -f
 ```bash
 mkdir -p /etc/hysteria && openssl ecparam -genkey -name prime256v1 -out /etc/hysteria/private.key && openssl req -new -x509 -days 3650 -key /etc/hysteria/private.key -out /etc/hysteria/cert.pem -subj "/CN=bing.com"
 ```
-# singbox-hysteria2
+
+```markdown
+# 搭建组合选择
+
+参考网站 [https://github.com/chika0801/sing-box-examples](https://github.com/chika0801/sing-box-examples)。后期可以根据需求自由组合。
+
+## 为什么选择 reality 和 hysteria2
+
+1. reality 目前是TCP协议里面号称最安全的。
+2. hysteria2 作者是最用心的，教程写得很清楚（[https://v2.hysteria.network/zh/](https://v2.hysteria.network/zh/)）。
+
+## 开始
+
+### 编辑 config 文件
+
+```bash
+nano /usr/local/etc/sing-box/config.json
+```
+
+按照以下修改：
+
+```json
+{
+    "inbounds": [
+        {
+            "type": "hysteria2",
+            "listen": "::",
+            "listen_port": 8443,
+            "users": [
+                {
+                    "password": "" // 你的密码
+                }
+            ],
+            "masquerade": "https://bing.com",
+            "tls": {
+                "enabled": true,
+                "alpn": [
+                    "h3"
+                ],
+                "certificate_path": "/etc/hysteria/cert.pem",
+                "key_path": "/etc/hysteria/private.key"
+            }
+        },
+        {
+            "type": "vless",
+            "listen": "::",
+            "listen_port": 443,
+            "users": [
+                {
+                    "uuid": "", // vps上执行 sing-box generate uuid
+                    "flow": "xtls-rprx-vision"
+                }
+            ],
+            "tls": {
+                "enabled": true,
+                "server_name": "www.tesla.com",
+                "reality": {
+                    "enabled": true,
+                    "handshake": {
+                        "server": "www.tesla.com",
+                        "server_port": 443
+                    },
+                    "private_key": "", // vps上执行 sing-box generate reality-keypair
+                    "short_id": [
+                        "0123456789abcdef" // 0到f，长度为2的倍数，长度上限为16，默认这个也可以
+                    ]
+                }
+            }
+        }
+    ],
+    "outbounds": [
+        {
+            "type": "direct"
+        }
+    ]
+}
+```
+
+### 重启 sing-box
+
+```bash
+systemctl restart sing-box
+```
+
+### 查看日志
+
+```bash
+journalctl -u sing-box -o cat -f
+```
+
 
 ## 端口跳跃
 
