@@ -146,19 +146,8 @@ journalctl -u sing-box -o cat -f
 
 ```bash
 apt install iptables-persistent
-iptables -F
-iptables -X
-iptables -A INPUT -i lo -j ACCEPT
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-iptables -A INPUT -p udp --dport 8443 -j ACCEPT
-iptables -A INPUT -p udp --dport 20000:40000 -j ACCEPT
-iptables -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-iptables -P INPUT DROP
-iptables -P OUTPUT ACCEPT
-iptables -L
-iptables -t nat -A PREROUTING -p udp --dport 20000:40000 -j DNAT --to-destination :8443
-iptables -t nat -nL --line
+iptables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8443
+ip6tables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8443
 netfilter-persistent save
 ```
 
