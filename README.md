@@ -78,7 +78,7 @@ nano /usr/local/etc/sing-box/config.json
         {
             "type": "hysteria2",
             "listen": "::",
-            "listen_port": 8443,
+            "listen_port": 8444,
             "users": [
                 {
                     "password": "" // 你的密码
@@ -146,8 +146,8 @@ journalctl -u sing-box -o cat -f
 
 ```bash
 apt install iptables-persistent
-iptables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8443
-ip6tables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8443
+iptables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8444
+ip6tables -t nat -A PREROUTING -p udp --dport 38000:40000 -j DNAT --to-destination :8444
 netfilter-persistent save
 ```
 
