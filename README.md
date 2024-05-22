@@ -149,5 +149,6 @@ apt install iptables-persistent
 iptables -t nat -A PREROUTING -p udp --dport 20000:40000 -j DNAT --to-destination :8444
 ip6tables -t nat -A PREROUTING -p udp --dport 20000:40000 -j DNAT --to-destination :8444
 netfilter-persistent save
+iptables -t nat -nL --line
 ```
 
