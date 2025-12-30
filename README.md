@@ -146,8 +146,8 @@ journalctl -u sing-box -o cat -f
 
 ```bash
 apt install iptables-persistent
-iptables -t nat -A PREROUTING -p udp --dport 41000:42000 -j DNAT --to-destination :50887
-ip6tables -t nat -A PREROUTING -p udp --dport 41000:42000 -j DNAT --to-destination :50887
+iptables -t nat -A PREROUTING -p udp --dport 41000:42000 -j DNAT --to-destination :53164
+ip6tables -t nat -A PREROUTING -p udp --dport 41000:42000 -j DNAT --to-destination :53164
 netfilter-persistent save
 iptables -t nat -nL --line
 ```
